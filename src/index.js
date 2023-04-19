@@ -73,6 +73,24 @@ let review2 =  reviewsList.lastElementChild
 }
 //Call the All beer function that also includes the first beer.
 retrieveAllBeers();
+
+
 //Add Eventlistener
-const reviewForm = document.getElementById("review-form");
+
 reviewForm.addEventListener("submit", addReview);
+
+fetch(url, {
+    method: "PATCH",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ description: updatedDescription })
+})
+.then(response => response.json())
+.then(data => {
+    // Update the beer's description on the page
+    beerDescription.innerHTML = updatedDescription;
+})
+.catch(error => {
+    console.error("Error updating description:", error);
+});
